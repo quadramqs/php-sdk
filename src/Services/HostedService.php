@@ -129,13 +129,13 @@ class HostedService
         $ref->transactionId = $transactionId;
 
         $trans = new Transaction();
-        $trans->authorizedAmount = $response["AMOUNT"];
+        $trans->authorizedAmount = isset($response["AMOUNT"]) ? $response["AMOUNT"] : 0;
         $trans->cvnResponseCode = $response["CVNRESULT"];
         $trans->responseCode = $result;
         $trans->responseMessage = $message;
         $trans->avsResponseCode = $response["AVSPOSTCODERESULT"];
         $trans->transactionReference = $ref;
-        
+
         $trans->responseValues = $response;
 
         return $trans;
